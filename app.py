@@ -1,14 +1,16 @@
-from services.ai_service import summarize_book
 from fastapi import FastAPI, Form
 from fastapi.templating import Jinja2Templates
+from fastapi.responses import HTMLResponse
 from starlette.requests import Request
+
+from services.ai_service import summarize_book
 
 app = FastAPI()
 
 templates = Jinja2Templates(directory="templates")
 
 
-@app.get("/")
+@app.get("/", response_class=HTMLResponse)
 def home(request: Request):
     return templates.TemplateResponse(
         request=request,
@@ -24,16 +26,17 @@ def summary(
 ):
 
     summary_text = summarize_book(
-    book_name,
-    summary_type
-)
+        book_name,
+        summary_type
+    )
 
     return templates.TemplateResponse(
-    request=request,
-    name="result.html",
-    context={
-        "book_name": book_name,
-        "summary": summary_text,
-        "summary_type": summary_type
-    }
-)
+        request=request,
+        name="result.html",
+        context={
+            "request": request,
+            "book_name": book_name,
+            "summary": summary_text,
+            "summary_type": summary_type
+        }
+    )
