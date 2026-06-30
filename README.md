@@ -108,11 +108,11 @@ http://127.0.0.1:8000
 
 ### Home Page
 
-[[HomePage](url)]()
+[Home Page](screenshots\homepage.png)()
 
 ### Summary Page
 
-(Add screenshot here)
+[Summary](screenshots\summary.png)
 
 ---
 
