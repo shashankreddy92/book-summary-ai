@@ -1,62 +1,99 @@
 # 📚 Book Summary AI
 
-An AI-powered web application built using **FastAPI** that generates book summaries based on the user's selected summary length.
-
-This project demonstrates backend web development using Python, FastAPI, Jinja2 templates, and Bootstrap.
+An AI-powered web application built with **FastAPI** that generates intelligent book summaries using **Google Gemini AI**, fetches book information from the **Google Books API**, and stores search history using **SQLite**.
 
 ---
 
-## 🚀 Features
+# 🚀 Features
 
-- 📖 Search for any book by name
-- 📝 Choose summary length:
+- 📖 Search any book by title
+- 🤖 AI-generated summaries using Google Gemini
+- 📏 Choose summary length
   - Short
   - Medium
   - Detailed
-- 🎨 Clean Bootstrap user interface
+- 📕 Displays book cover
+- ✍️ Shows author information
+- 🏢 Displays publisher details
+- 📅 Published date
+- ⭐ Average rating
+- 📄 Book description
+- 💾 Stores search history in SQLite
+- 🎨 Responsive Bootstrap UI
 - ⚡ FastAPI backend
-- 🖥️ Dynamic HTML pages using Jinja2
-- 🏗️ Service-based project architecture
+- 🧩 Modular service-based architecture
 
 ---
 
-## 🛠️ Tech Stack
+# 🛠️ Tech Stack
+
+## Backend
 
 - Python 3
 - FastAPI
-- Jinja2 Templates
-- Bootstrap 5
-- HTML5
-- CSS
 - Uvicorn
 
+## AI
+
+- Google Gemini API
+
+## APIs
+
+- Google Books API
+
+## Frontend
+
+- HTML5
+- Bootstrap 5
+- Jinja2 Templates
+
+## Database
+
+- SQLite
+
+## Others
+
+- Requests
+- Python-dotenv
+- Git
+- GitHub
+
 ---
 
-## 📂 Project Structure
+# 📂 Project Structure
 
-```
+```text
 book-summary-ai/
 
-│── app.py
-│── requirements.txt
-│── README.md
-│── .gitignore
+├── app.py
+├── requirements.txt
+├── README.md
+├── .gitignore
+├── .env
+│
+├── database/
+│   └── books.db
 │
 ├── services/
-│      ai_service.py
+│   ├── ai_service.py
+│   ├── book_service.py
+│   └── database_service.py
 │
 ├── templates/
-│      index.html
-│      result.html
+│   ├── index.html
+│   ├── result.html
+│   └── history.html
 │
-├── static/
+├── screenshots/
+│   ├── home.png
+│   └── result.png
 │
-└── database/
+└── static/
 ```
 
 ---
 
-## ⚙️ Installation
+# ⚙️ Installation
 
 Clone the repository
 
@@ -64,7 +101,7 @@ Clone the repository
 git clone https://github.com/shashankreddy92/book-summary-ai.git
 ```
 
-Move into the project directory
+Move into the project
 
 ```bash
 cd book-summary-ai
@@ -90,13 +127,20 @@ Install dependencies
 pip install -r requirements.txt
 ```
 
+Create a `.env` file in the project root:
+
+```env
+GEMINI_API_KEY=your_gemini_api_key
+GOOGLE_BOOKS_API_KEY=your_google_books_api_key
+```
+
 Run the application
 
 ```bash
 uvicorn app:app --reload
 ```
 
-Open your browser
+Open:
 
 ```
 http://127.0.0.1:8000
@@ -104,64 +148,112 @@ http://127.0.0.1:8000
 
 ---
 
-## 📷 Screenshots
+# 📷 Screenshots
 
-### Home Page
+There is a separate folder which contains the screenshots.
 
-[Home Page](screenshots\homepage.png)()
+## ⚙️ How It Works
 
-### Summary Page
-
-[Summary](screenshots\summary.png)
-
----
-
-## 📌 How It Works
-
-1. User enters a book name.
+1. User enters a book title.
 2. User selects the summary length.
 3. FastAPI receives the request.
-4. The backend calls the AI service.
-5. The generated summary is displayed on the results page.
+4. Google Books API retrieves book details.
+5. Gemini AI generates the summary.
+6. The summary is saved to SQLite.
+7. Results are displayed on the webpage.
 
 ---
 
-## 🔮 Future Enhancements
+# 🗄️ Database
 
-- 🤖 Integrate OpenAI or Gemini API
-- 📚 Google Books API integration
-- 🖼️ Display book cover images
-- ⭐ Show ratings and reviews
-- 💾 Store search history using SQLite
-- 📄 Export summaries as PDF
-- ❤️ Save favorite books
-- 🔍 Search previous summaries
+SQLite stores:
+
+- Book Name
+- Summary Type
+- AI Generated Summary
+- Timestamp
 
 ---
 
-## 📖 Learning Outcomes
+# 🏗️ Architecture
+
+```text
+          User
+
+            │
+
+            ▼
+
+      FastAPI Backend
+
+            │
+
+      ┌───────────────┐
+      │               │
+      ▼               ▼
+
+Google Books API   Gemini AI
+
+      │               │
+
+      └──────┬────────┘
+
+             ▼
+
+     SQLite Database
+
+             ▼
+
+       Jinja2 Templates
+
+             ▼
+
+        Browser
+```
+
+---
+
+# 🚀 Future Enhancements
+
+- ⭐ Favorite Books
+- 📜 Summary History Dashboard
+- 📄 Export Summary as PDF
+- ❤️ User Authentication
+- 🌙 Dark Mode
+- 📈 Analytics Dashboard
+- 🔍 Search History
+- ☁️ Deploy to Render or Railway
+- 🐳 Docker Support
+
+---
+
+# 📖 Learning Outcomes
 
 This project helped me learn:
 
-- FastAPI fundamentals
-- Routing
-- HTML Forms
-- Jinja2 Templates
+- FastAPI
+- REST API Integration
+- Google Gemini API
+- Google Books API
+- SQLite
+- Environment Variables
 - Service Layer Architecture
-- Bootstrap UI
+- Jinja2 Templates
+- Bootstrap
 - Git & GitHub
-- Python project structure
+- Python Project Structure
 
 ---
 
-## 👨‍💻 Author
+# 👨‍💻 Author
 
 **Shashank Reddy**
 
-GitHub: https://github.com/shashankreddy92
+GitHub:
+https://github.com/shashankreddy92
 
 ---
 
-## ⭐ If you like this project
+# ⭐ Support
 
-Please consider giving it a ⭐ on GitHub.
+If you found this project useful, please consider giving it a ⭐ on GitHub.
