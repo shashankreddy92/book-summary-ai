@@ -1,32 +1,35 @@
+import os
+
+import google.generativeai as genai
+from dotenv import load_dotenv
+
+load_dotenv()
+
+API_KEY = os.getenv("GEMINI_API_KEY")
+
+genai.configure(api_key=API_KEY)
+
+model = genai.GenerativeModel("gemini-2.5-flash")
+
+
 def summarize_book(book_name, summary_type):
 
-    if summary_type == "short":
-        return f"""
-This is a short summary of "{book_name}".
+    prompt = f"""
+    You are a helpful book summarization assistant.
 
-This feature is currently a placeholder.
-Soon an AI model will generate an actual summary.
-"""
+    Generate a {summary_type} summary for the book:
 
-    elif summary_type == "medium":
-        return f"""
-This is a medium-length summary of "{book_name}".
+    {book_name}
 
-The application currently demonstrates how different summary
-lengths will be displayed.
+    If the book is well known,
+    generate an accurate summary.
 
-Later we will integrate an AI model to generate real summaries.
-"""
+    If the book is unknown,
+    politely say that the book could not be found.
 
-    elif summary_type == "detailed":
-        return f"""
-This is a detailed summary of "{book_name}".
+    Keep the response clean and easy to read.
+    """
 
-Future versions of this application will use an AI model
-to generate detailed chapter-wise summaries, key ideas,
-important lessons, and takeaways.
+    response = model.generate_content(prompt)
 
-This is currently sample text.
-"""
-
-    return "Summary not available."
+    return response.text
